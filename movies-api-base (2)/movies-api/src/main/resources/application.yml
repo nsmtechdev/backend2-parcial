@@ -1,0 +1,72 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: movies-service
+    security:
+      oauth2:
+        client:
+          provider:
+            keycloak:
+              issuer-uri: ${KEYCLOAK_URL:http://localhost:8082/}realms/DigitalMedia
+            registration:
+              keycloak:
+                client-id: microservicios
+               # client-secret: 2zjJjakYyx6WrLT4hxSZLnutBwk9M6Ci
+                scope: openid
+                redirect-uri: http://localhost:8086
+  data:
+    mongodb:
+      authentication-database: admin
+        username: root
+        password: root
+        database: parcialBE
+        port: 27017
+        host: mongodb
+   #  uri: mongodb://localhost:27017/moviesdb
+  main:
+    allow-circular-references: true
+
+app:
+  realm: DigitalMedia
+  cors:
+    allowed-origins: http://localhost:3000
+
+management:
+  endpoint:
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure.include: "*"
+  info:
+    env:
+     enabled: true
+  health:
+      show-details: always
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    groups-order: DESC
+    disable-swagger-default-url: true
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 1.0.0
+    description: Peliculas Parcial Backend 2 NSM
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

@@ -1,0 +1,32 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+  #cloud:
+    #config:
+      #enabled: true
+      #uri: http://localhost:8888
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    info:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Eureka Parcial Backend II NSM
+    version: 1.0.0
