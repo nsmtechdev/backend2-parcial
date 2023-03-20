@@ -1,23 +1,31 @@
-eureka:
-  client:
-    enabled: false
-
 server:
-  port: 8086
+  port: 8087
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+    enabled: true
 
 springdoc:
   show-actuator: true
   swagger-ui:
     groups-order: DESC
     disable-swagger-default-url: true
+
 management:
   endpoints:
     web:
-      exposure.include: beans, env, health, info, metrics, mappings
+      exposure.include: "*"
   endpoint:
     health:
       show-details: always
-
+    info:
+     env:
+      enabled: true
 app:
   cors:
     allowed-origins: http://localhost:3000
@@ -25,6 +33,18 @@ app:
 spring:
   application:
     name: users-service
+    security:
+      oauth2:
+        client:
+          provider:
+            keycloak:
+              issuer-uri: ${KEYCLOAK_URL:http://localhost:8082/}realms/${app.realm}
+          registration:
+            keycloak:
+              client-id: microservicios
+              client-secret: *****
+              scope: openid
+              redirect-uri: http://localhost:8087
   data:
     mongodb:
       host: localhost
@@ -35,3 +55,10 @@ spring:
       database: moviesdb
   main:
     allow-circular-references: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

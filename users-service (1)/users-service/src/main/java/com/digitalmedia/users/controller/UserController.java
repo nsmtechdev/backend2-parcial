@@ -4,6 +4,7 @@ import com.digitalmedia.users.model.User;
 import com.digitalmedia.users.model.dto.UserRequest;
 import com.digitalmedia.users.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -14,12 +15,10 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
   private final IUserService userService;
- //TODO  estos dos endpoints funcionaran cuando este configurada la seguridad en el proyecto
 
-  /*@GetMapping("/me")
-  public User getUserExtra(Principal principal) {
-    return userService.validateAndGetUserExtra(principal.getName());
-  }*/
+
+
+
 
   @GetMapping("/me")
   public User getUserExtra(@RequestParam String principal) {

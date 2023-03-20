@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public class MongoUserRepository implements IUserRepository {
+
     private IMongoUserRepository mongoUserRepository;
 
     public MongoUserRepository(IMongoUserRepository mongoUserRepository) {

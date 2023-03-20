@@ -1,4 +1,4 @@
-package com.afidal.usuariosservice.security;
+package com.digitalmedia.users.security;
 
 
 import org.springframework.beans.factory.annotation.Value;
